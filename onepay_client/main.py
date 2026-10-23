@@ -108,7 +108,7 @@ class PaymentProvider:
         self,
         id: str,
         name: str,
-        slug: Literal["stripe", "razorpay", "billdesk", "xendit"],
+        slug: Literal["stripe", "razorpay", "billdesk", "xendit", "coda"],
         logo: Optional[str],
         description: Optional[str],
         is_recommended: bool,
@@ -255,7 +255,7 @@ class OnepayClient:
     def create_payment(
         self,
         contact_id: str,
-        provider: Literal["stripe", "razorpay", "billdesk", "xendit"],
+        provider: Literal["stripe", "razorpay", "billdesk", "xendit", "coda"],
         amount: float,
         currency: str,
         return_url: str,
@@ -347,7 +347,7 @@ class OnepayClient:
         return res.data
 
     def deactivate_subscription(self, payment_id: str):
-        """Deactivate a Xendit recurring subscription plan."""
+        """Stop a recurring subscription: a Xendit plan or a Coda schedule."""
         res = self.__request(
             method="POST",
             endpoint="/v1/payments/subscription/plan/deactivate",

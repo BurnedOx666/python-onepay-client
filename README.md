@@ -103,6 +103,24 @@ result = client.create_payment(
 print(result.recurring)  # True
 ```
 
+With `provider="coda"`, recurring is card-only: the first payment saves the card on Coda's
+page and OnePay charges it every cycle. In a country Coda cannot save cards in, the payment
+is created as a one-time payment and `result.recurring` is `False`.
+
+```python
+result = client.create_payment(
+    contact_id=contact_id,
+    provider="coda",
+    amount=19.90,
+    currency="MYR",
+    country_code="MY",
+    return_url="https://yourdomain.com/subscription/callback",
+    ip="103.21.58.1",
+    user_agent="Mozilla/5.0...",
+    recurring_conf={"interval": "MONTH", "interval_count": 1, "total_recurrence": 12},
+)
+```
+
 ### Get Payment Status
 
 ```python
@@ -136,6 +154,8 @@ result = client.refund_payment(
 ```
 
 ### Deactivate a Subscription
+
+Works for Xendit plans and Coda schedules: no further cycle is charged.
 
 ```python
 result = client.deactivate_subscription(payment_id="...")
@@ -185,6 +205,13 @@ except OnepayException as e:
 | `OnepayResponse` | Raw API response wrapper |
 | `OnepayException` | Error raised on API failures |
 | `decode_webhook_payload` | Standalone function to verify & decode webhook JWTs |
+
+## Changelog
+
+### 0.4.0
+
+- `"coda"` added to the provider literals (`create_payment(provider=...)`, `PaymentProvider.slug`).
+- `deactivate_subscription` documented for Coda schedules as well as Xendit plans.
 
 ## License
 
