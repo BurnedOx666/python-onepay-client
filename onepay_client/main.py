@@ -108,7 +108,7 @@ class PaymentProvider:
         self,
         id: str,
         name: str,
-        slug: Literal["stripe", "razorpay", "billdesk", "xendit"],
+        slug: Literal["stripe", "razorpay", "billdesk", "xendit", "razergold"],
         logo: Optional[str],
         description: Optional[str],
         is_recommended: bool,
@@ -255,7 +255,7 @@ class OnepayClient:
     def create_payment(
         self,
         contact_id: str,
-        provider: Literal["stripe", "razorpay", "billdesk", "xendit"],
+        provider: Literal["stripe", "razorpay", "billdesk", "xendit", "razergold"],
         amount: float,
         currency: str,
         return_url: str,

@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: onepay_client
-Version: 0.3.0
+Version: 0.5.0
 Summary: Python client for OnePay API
 Home-page: https://github.com/BurnedOx/python-onepay-client.git
 Author: Mainak Debnath

@@ -82,6 +82,29 @@ print(result.payment_id)  # Internal payment ID
 print(result.link)         # Redirect the user to this URL to complete payment
 ```
 
+### Create a Razer Gold Payment
+
+With `provider="razergold"` the payer completes the payment on Razer Gold's hosted page:
+redirect the browser to `result.link` as a top-level navigation, not in an iframe. Without
+`payment_method` the page is Razer's Payment Wall; with it, the payer goes straight to the
+Razer channel configured for that method. Razer's page stays valid for 20 minutes, and a
+retry is a new `create_payment` call, which returns a new `payment_id`. Razer Gold payments
+are one-time only: `recurring_conf`, `capture_payment` and `refund_payment` are not available
+for this provider.
+
+```python
+result = client.create_payment(
+    contact_id=contact_id,
+    provider="razergold",
+    amount=10.00,
+    currency="MYR",
+    country_code="MY",
+    return_url="https://yourdomain.com/payment/callback",
+    ip="103.21.58.1",
+    user_agent="Mozilla/5.0...",
+)
+```
+
 ### Create a Recurring / Subscription Payment
 
 ```python
@@ -185,6 +208,12 @@ except OnepayException as e:
 | `OnepayResponse` | Raw API response wrapper |
 | `OnepayException` | Error raised on API failures |
 | `decode_webhook_payload` | Standalone function to verify & decode webhook JWTs |
+
+## Changelog
+
+### 0.5.0
+
+- `"razergold"` added to the provider literals (`create_payment(provider=...)`, `PaymentProvider.slug`).
 
 ## License
 
