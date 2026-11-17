@@ -8,7 +8,7 @@ setup(
     author="Mainak Debnath",
     author_email="mainak.debnath@icloud.com",
     description="Python client for OnePay API",
-    url="https://github.com/BurnedOx/python-onepay-client.git",
+    url="https://github.com/BurnedOx666/python-onepay-client.git",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
