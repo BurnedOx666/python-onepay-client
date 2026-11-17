@@ -5,7 +5,7 @@ Python SDK for the OnePay Payments API. Provides a simple, typed interface for m
 ## Installation
 
 ```bash
-pip install git+https://github.com/BurnedOx/python-onepay-client.git
+pip install git+https://github.com/BurnedOx666/python-onepay-client.git
 ```
 
 ## Requirements
